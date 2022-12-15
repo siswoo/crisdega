@@ -1,0 +1,11 @@
+*{
+    text-align: justify;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.fondo{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: aquamarine;
+}

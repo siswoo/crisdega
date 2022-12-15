@@ -11,9 +11,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/estilos.css">
 	<title>Crisdega</title>
 </head>
-<body>
+<body class="fondo" style="background-image: url(img/imagenes/fondo1.jpg);">
 <div class="col-12 text-center mt-3" style="font-weight: bold; font-size: 30px; text-transform: uppercase;">Listado de Inventario</div>
 <div class="row ml-3 mr-3" style="margin-top: 2rem;">
 		<input type="hidden" name="datatables" id="datatables" data-pagina="1" data-consultasporpagina="10" data-filtrado="" data-bodega="" data-conteo="">
