@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="icon" type="image/x-icon" href="img/favicon/inspeccion.png">
 	<title>Crisdega</title>
 </head>
 <body class="fondo" style="background-image: url(img/imagenes/fondo.jpg);">
