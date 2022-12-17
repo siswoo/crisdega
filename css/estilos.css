@@ -1,11 +1,22 @@
-*{
+* {
     text-align: justify;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.fondo{
+.fondo {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: aquamarine;
+}
+
+img {
+    width: auto;
+    height: 50px;
+}
+
+.navbar {
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
 }
