@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['crisdega_usuario_id'])) {
 	header("Location: index.php");
 	exit;
+}else{
+	$crisdega_usuario_id = $_SESSION['crisdega_usuario_id'];
 }
 ?>
 <!DOCTYPE html>
@@ -18,36 +20,7 @@ if (!isset($_SESSION['crisdega_usuario_id'])) {
 </head>
 
 
-<div id="header">
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="administrador.php">
-				<img src="img/logo/logos.png" id="logo" alt="Logo" width="30" height="24" class="d-inline-block text-justify">
-			</a>
-			<div class="row">
-				<div class="col-12">
-					<a href="administrador.php">
-						<button type=" button" class="btn btn-primary">Listado</button>
-					</a>
-					<?php
-					include("script/conexion.php");
-					$sql1 = "SELECT * FROM bodega";
-					$proceso1 = mysqli_query($conexion, $sql1);
-					while ($row1 = mysqli_fetch_array($proceso1)) {
-						$bodegas_id = $row1["id"];
-						$bodegas_descripcion = $row1["descripcion"];
-						echo '
-						<a href="columnas.php?id=' . $bodegas_id . '&descripcion=' . $bodegas_descripcion . '">
-							<button type=" button" class="btn btn-primary">' . $bodegas_descripcion . '</button>
-						</a>
-					';
-					}
-					?>
-				</div>
-			</div>
-		</div>
-	</nav>
-</div>
+<?php include("header.php"); ?>
 
 <body class="fondo" style="background-image: url(img/imagenes/fondo1.jpg);">
 	<div class="col-12 text-center mt-3" style="font-weight: bold; font-size: 30px; text-transform: uppercase;">Listado de Inventario</div>

@@ -7,12 +7,15 @@ CREATE TABLE usuarios (
 	id INT AUTO_INCREMENT,
 	usuario VARCHAR(250) NOT NULL,
 	password VARCHAR(250) NOT NULL,
-	rol INT NOT NULL,
+	desde INT NOT NULL,
+	hasta INT NOT NULL,
+	conteo_id INT NOT NULL,
 	PRIMARY KEY (id)
 ); ALTER TABLE usuarios CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-INSERT INTO usuarios (usuario,password,rol) VALUES 
-('admin','d964173dc44da83eeafa3aebbee9a1a0',1);
+INSERT INTO usuarios (usuario,password,desde,hasta,conteo_id) VALUES 
+('admin','d964173dc44da83eeafa3aebbee9a1a0',1,250,1),
+('admin2','d964173dc44da83eeafa3aebbee9a1a0',1,250,1);
 
 DROP TABLE IF EXISTS bodega;
 CREATE TABLE bodega (

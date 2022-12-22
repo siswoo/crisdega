@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['crisdega_usuario_id'])) {
 	header("Location: index.php");
 	exit;
+}else{
+	$crisdega_usuario_id = $_SESSION['crisdega_usuario_id'];
 }
 ?>
 <!DOCTYPE html>
@@ -18,40 +20,12 @@ if (!isset($_SESSION['crisdega_usuario_id'])) {
 </head>
 
 
-<div id="header">
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="administrador.php">
-				<img src="img/logo/logos.png" id="logo" alt="Logo" width="30" height="24" class="d-inline-block text-justify">
-			</a>
-			<div class="row">
-				<div class="col-12">
-					<a href="administrador.php">
-						<button type=" button" class="btn btn-primary">Listado</button>
-					</a>
-					<?php
-					include("script/conexion.php");
-					$sql1 = "SELECT * FROM bodega";
-					$proceso1 = mysqli_query($conexion, $sql1);
-					while ($row1 = mysqli_fetch_array($proceso1)) {
-						$bodegas_id = $row1["id"];
-						$bodegas_descripcion = $row1["descripcion"];
-						echo '
-						<a href="columnas.php?id=' . $bodegas_id . '&descripcion=' . $bodegas_descripcion . '">
-							<button type=" button" class="btn btn-primary">' . $bodegas_descripcion . '</button>
-						</a>
-					';
-					}
-					?>
-				</div>
-			</div>
-		</div>
-	</nav>
-</div>
+<?php include("header.php"); ?>
 
 <?php
 $bodegas_id_get = $_GET["id"];
 $bodegas_descripcion_get = $_GET["descripcion"];
+$especial = $_GET["especial"];
 ?>
 
 <body class="fondo" style="background-image: url(img/imagenes/fondo1.jpg);">
@@ -63,52 +37,97 @@ $bodegas_descripcion_get = $_GET["descripcion"];
 		<div class="col-2 text-center mb-3" style="font-weight:bold; font-size: 22px;">Cantidad</div>
 		<div class="col-4 text-center mb-3" style="font-weight:bold; font-size: 22px;">Opciones</div>
 
-		<div class="col-2 text-center mb-3">
-			<?php
-			$sql2 = "SELECT * FROM ubicacion WHERE bodega_id = " . $bodegas_id_get;
-			$proceso2 = mysqli_query($conexion, $sql2);
-			$pase1 = 0;
-			while ($row2 = mysqli_fetch_array($proceso2)) {
-				$ubicacion_id = $row2["id"];
-				$ubicacion_descripcion = $row2["descripcion"];
-				$sql3 = "SELECT * FROM inventario WHERE ubicacion_id = " . $ubicacion_id;
-				$proceso3 = mysqli_query($conexion, $sql3);
-				$contador3 = mysqli_num_rows($proceso3);
-				if ($contador3 == 0 and $pase1 == 0) {
-					$pase1 = 1;
-					$ubicacion_id_final = $row2["id"];
-					$ubicacion_descripcion_final = $row2["descripcion"];
-				}
+		<?php
+		if($especial!=0){
+			$sql6 = "SELECT * FROM ubicacion WHERE id = ".$especial;
+			$proceso6 = mysqli_query($conexion, $sql6);
+			while ($row6 = mysqli_fetch_array($proceso6)) {
+				$especial_descripcion = $row6["descripcion"];
 			}
-			echo $ubicacion_descripcion_final;
-			?>
-		</div>
-		<div class="col-2 mb-3">
-			<select class="form-control" name="conteo" id="conteo" required>
-				<option value="1">C1</option>
-			</select>
-			<!--<input type="text" name="conteo" id="conteo" value="C1" class="form-control" autocomplete="off" required>-->
-		</div>
-		<div class="col-2 mb-3">
-			<input type="text" name="referencia" id="referencia" value="" class="form-control" placeholder="referencia" autocomplete="off" required>
-		</div>
-		<div class="col-2 mb-3">
-			<input type="text" name="cantidad" id="cantidad" value="" class="form-control" placeholder="cantidad" autocomplete="off" required>
-		</div>
-		<div class="col-4 text-center mb-3">
-			<button type="button" class="btn btn-primary">Copiar</button>
-			<button type="button" class="btn btn-success" onclick="registrar1();">Registrar</button>
-		</div>
+			$ubicacion_id_final = $especial;
+			echo '
+				<div class="col-2 text-center mb-3">'.$especial_descripcion.' </div>
+				<div class="col-2 text-center mb-3">
+					<select class="form-control" name="conteo" id="conteo" required>
+						<option value="1">C1</option>
+					</select>
+				</div>
+				<div class="col-2 mb-3">
+					<input type="text" name="referencia" id="referencia" value="" class="form-control" placeholder="referencia" autocomplete="off" required>
+				</div>
+				<div class="col-2 mb-3">
+					<input type="text" name="cantidad" id="cantidad" value="" class="form-control" placeholder="cantidad" autocomplete="off" required>
+				</div>
+				<div class="col-4 text-center mb-3">
+					<button type="button" class="btn btn-primary" onclick="copiar1();">Copiar</button>
+					<button type="button" class="btn btn-success" onclick="registrar1();">Registrar</button>
+				</div>
+			';
+		}else{ ?>
+			<div class="col-2 text-center mb-3">
+				<?php
+				$sql2 = "SELECT * FROM ubicacion WHERE bodega_id = " . $bodegas_id_get;
+				$proceso2 = mysqli_query($conexion, $sql2);
+				$pase1 = 0;
+				while ($row2 = mysqli_fetch_array($proceso2)) {
+					$ubicacion_id = $row2["id"];
+					$ubicacion_descripcion = $row2["descripcion"];
+					$sql3 = "SELECT * FROM inventario WHERE ubicacion_id = " . $ubicacion_id;
+					$proceso3 = mysqli_query($conexion, $sql3);
+					$contador3 = mysqli_num_rows($proceso3);
+					if ($contador3 == 0 and $pase1 == 0) {
+						$pase1 = 1;
+						$ubicacion_id_final = $row2["id"];
+						$ubicacion_descripcion_final = $row2["descripcion"];
+					}
+				}
+				if($ubicacion_id_final>=$hasta){
+					echo '';
+				}else{
+					echo $ubicacion_descripcion_final;
+				} ?>
+			</div>
+		<?php 
+			if($ubicacion_id_final>=$hasta){
+				echo '<div class="col-12 text-center mb-3">El usuario no tiene cupo</div>';
+			}else{ ?>
+				<div class="col-2 mb-3">
+					<?php
+					$sql2 = "SELECT * FROM conteo WHERE id = ".$conteo_id;
+					$proceso2 = mysqli_query($conexion, $sql2);
+					while ($row2 = mysqli_fetch_array($proceso2)) {
+						$conteo_descripcion = $row2["descripcion"];
+					}
+					?>
+					<select class="form-control" name="conteo" id="conteo" required>
+						<option value="<?php echo $conteo_id; ?>"><?php echo $conteo_descripcion; ?></option>
+					</select>
+					<!--<input type="text" name="conteo" id="conteo" value="C1" class="form-control" autocomplete="off" required>-->
+				</div>
+				<div class="col-2 mb-3">
+					<input type="text" name="referencia" id="referencia" value="" class="form-control" placeholder="referencia" autocomplete="off" required>
+				</div>
+				<div class="col-2 mb-3">
+					<input type="text" name="cantidad" id="cantidad" value="" class="form-control" placeholder="cantidad" autocomplete="off" required>
+				</div>
+				<div class="col-4 text-center mb-3">
+					<button type="button" class="btn btn-primary" onclick="copiar1();">Copiar</button>
+					<button type="button" class="btn btn-success" onclick="registrar1();">Registrar</button>
+				</div>
+
+			<?php } 
+		}
+		?>
 	</div>
 
 	<?php $ubicacion_url = $_SERVER["PHP_SELF"]; ?>
+	<input type="text" value="" id="output" style="background: transparent;border: none; color: transparent;">
 </body>
 
 </html>
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/sweetalert2.js"></script>
-
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -196,7 +215,7 @@ $bodegas_descripcion_get = $_GET["descripcion"];
 			success: function(respuesta) {
 				console.log(respuesta);
 				if (respuesta["estatus"] == "ok") {
-					window.location.replace("columnas.php?id=<?php echo $bodegas_id_get; ?>&descripcion=<?php echo $bodegas_descripcion_get; ?>");
+					window.location.replace("columnas.php?id=<?php echo $bodegas_id_get; ?>&descripcion=<?php echo $bodegas_descripcion_get; ?>&especial=<?php echo $especial; ?>");
 				} else if (respuesta["estatus"] == "error") {
 					Swal.fire({
 						title: 'Error',
@@ -211,5 +230,15 @@ $bodegas_descripcion_get = $_GET["descripcion"];
 				console.log(respuesta['responseText']);
 			}
 		});
+	}
+
+	function copiar1(){
+		var copyText = document.getElementById("referencia");
+      	var copyText2 = document.getElementById("cantidad");
+      	var output = document.getElementById("output");
+      	output.value = copyText.value + " " + copyText2.value;
+      	console.log(output.value);
+      	output.select();
+      	document.execCommand("copy");
 	}
 </script>
