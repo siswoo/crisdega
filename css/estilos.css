@@ -1,22 +1,65 @@
+/* Estilos generales */
 * {
     text-align: justify;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* Fondo */
 .fondo {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: aquamarine;
+    background-color: white;
+    min-height: 100%; /* Mínimo alto de la imagen */
 }
 
+
+/* Imágenes */
 img {
-    width: auto;
-    height: 50px;
+    max-width: 100%; /* Haz que las imágenes sean responsivas */
+    height: auto;
 }
 
+/* Barra de navegación */
 .navbar {
-    background: #bdc3c7;
-    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
-    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: rgb(13,8,107);
+    background: linear-gradient(90deg, rgba(13,8,107,1) 9%, rgba(9,121,99,1) 46%, rgba(0,212,255,1) 100%);
 }
+
+/* Tablas */
+table {
+    background-color: white;
+    width: 100%; /* Haz que la tabla sea 100% del ancho del contenedor */
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid;
+    padding: 8px; /* Agrega un espaciado adecuado entre celdas */
+}
+
+/* Estilos específicos para dispositivos pequeños (media queries) */
+@media screen and (max-width: 768px) {
+    /* Modifica los estilos para pantallas de hasta 768px de ancho */
+    
+    /* Ejemplo: Redefine estilos para la barra de navegación */
+    .navbar {
+        background: #2c3e50;
+        color: white;
+    }
+    
+    /* Ejemplo: Cambia el tamaño del texto en la tabla */
+    table {
+        font-size: 14px;
+    }
+    @media (max-width: 768px) {
+        .fondo {
+            background-attachment: scroll; /* Cambiar a desplazamiento en pantallas pequeñas */
+        }
+    }
+}
+
+

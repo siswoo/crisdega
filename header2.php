@@ -45,37 +45,24 @@
 
                     // Imprimir botones con enlaces dinámicos
                     echo '
-                         <a href="columnas.php?id=1&descripcion=ME&especial=0&titulo=171">
-                            <button type="button" class="btn btn-primary">171</button>
+                        <a href="columnas.php?id=' . $bodegas_id . '&descripcion=' . $bodegas_descripcion . '&especial=0">
+                            <button type="button" class="btn btn-primary">' . $bodegas_descripcion . '</button>
                         </a>
-                        <a href="columnas.php?id=1&descripcion=ME&especial=2349&titulo=171?">
+
+                        <a href="columnas.php?id=1&descripcion=171&especial=2361">
                             <button type="button" class="btn btn-primary">171 ?</button>
                         </a>
-                        <a href="columnas.php?id=2&descripcion=ME&especial=2350&titulo=186?">
+                        <a href="columnas.php?id=2&descripcion=186&especial=2362">
                             <button type="button" class="btn btn-primary">186 ?</button>
                         </a>
-                        <a href="columnas.php?id=3&descripcion=ME&especial=2351&titulo=187?">
+                        <a href="columnas.php?id=3&descripcion=187&especial=2363">
                             <button type="button" class="btn btn-primary">187 ?</button>
                         </a>
-                        <a href="columnas.php?id=4&descripcion=ME&especial=2352&titulo=188?">
+                        <a href="columnas.php?id=4&descripcion=188&especial=2364">
                             <button type="button" class="btn btn-primary">188 ?</button>
                         </a>
-                        <a href="columnas.php?id=4&descripcion=ME&especial=2353&titulo=189?">
+                        <a href="columnas.php?id=4&descripcion=189&especial=2365">
                             <button type="button" class="btn btn-primary">189 ?</button>
-                        </a>
-                    ';
-                    echo '
-                        <a href="columnas.php?id=1&descripcion=ME&especial=2354">
-                            <button type="button" class="btn btn-primary">BODEGA ME</button>
-                        </a>
-                        <a href="columnas.php?id=2&descripcion=MP&especial=2355">
-                            <button type="button" class="btn btn-primary">BODEGA MP</button>
-                        </a>
-                        <a href="columnas.php?id=3&descripcion=PT&especial=2356">
-                            <button type="button" class="btn btn-primary">BODEGA PT</button>
-                        </a>
-                        <a href="columnas.php?id=4&descripcion=PP&especial=2357">
-                            <button type="button" class="btn btn-primary">BODEGA PP</button>
                         </a>
                     ';
                     ?>

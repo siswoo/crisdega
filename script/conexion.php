@@ -1,13 +1,22 @@
 <?php
+// Datos de conexión
 $servidor = "localhost";
-$usuario = "root";
-$contrasena = "";
+$usuario = "root"; // Reemplaza con tu nombre de usuario de MySQL
+$contrasena = ""; // Reemplaza con tu contraseña de MySQL
 $basededatos = "crisdega";
 
-$conexion = mysqli_connect( $servidor, $usuario, $contrasena ) or die ("Problemas con la Base de datos, contactar al desarollador");
-$db = mysqli_select_db( $conexion, $basededatos ) or die ( "Error con la base de datos registrar la configuración" );
+// Crear la conexión
+$conexion = new mysqli($servidor, $usuario, $contrasena, $basededatos);
 
-if (!mysqli_set_charset($conexion, "utf8")) {
-    printf("Error cargando el conjunto de caracteres utf8: %s\n", mysqli_error($conexion));
-    exit();
-} else {}
+// Verificar la conexión
+if ($conexion->connect_error) {
+    die("Error en la conexión a la base de datos: " . $conexion->connect_error);
+}
+
+// Establecer el conjunto de caracteres a UTF-8
+if (!$conexion->set_charset("utf8")) {
+    die("Error cargando el conjunto de caracteres utf8: " . $conexion->error);
+}
+
+// Ahora, puedes usar la variable $conexion para realizar consultas a la base de datos.
+?>
